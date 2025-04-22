@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about-topic',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './about-topic.component.html',
   styleUrl: './about-topic.component.css'
 })
