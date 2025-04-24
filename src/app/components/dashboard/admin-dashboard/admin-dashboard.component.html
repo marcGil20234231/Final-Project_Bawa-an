@@ -1,1 +1,169 @@
-<p>admin-dashboard works!</p>
+
+<div class="container my-4">
+  <h1 class="mb-4">Admin Dashboard</h1>
+  
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error && !isLoading" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div class="row">
+    <!-- Summary Cards -->
+    <div class="col-md-4 mb-4">
+      <div class="card bg-danger text-white">
+        <div class="card-body">
+          <h5 class="card-title">Total Courses</h5>
+          <h2 class="display-4">{{ courses.length }}</h2>
+          <p class="card-text">Available courses on the platform</p>
+          <a routerLink="/courses" class="btn btn-outline-light">Manage Courses</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+      <div class="card bg-dark text-white">
+        <div class="card-body">
+          <h5 class="card-title">Total Teachers</h5>
+          <h2 class="display-4">{{ teachers.length }}</h2>
+          <p class="card-text">Registered teachers on the platform</p>
+          <a routerLink="/teachers" class="btn btn-outline-light">Manage Teachers</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+      <div class="card bg-danger text-white">
+        <div class="card-body">
+          <h5 class="card-title">Total Students</h5>
+          <h2 class="display-4">{{ students.length }}</h2>
+          <p class="card-text">Registered students on the platform</p>
+          <a routerLink="/students" class="btn btn-outline-light">Manage Students</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Management Section -->
+  <div class="card mb-4">
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Student Management</h5>
+      <a routerLink="/students/new" class="btn btn-light btn-sm">
+        <i class="bi bi-plus-circle"></i> Add New Student
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Student ID</th>
+              <th>Year Level</th>
+              <th>Program</th>
+              <th>Major</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>{{ student.name }}</td>
+              <td>{{ student.studentId }}</td>
+              <td>{{ student.yearLevel }}</td>
+              <td>{{ student.program }}</td>
+              <td>{{ student.major }}</td>
+              <td>{{ student.email }}</td>
+              <td>
+                <a [routerLink]="['/students', student.id]" class="btn btn-sm btn-outline-danger me-2">
+                  <i class="bi bi-eye"></i> View
+                </a>
+                <button (click)="deleteStudent(student.id)" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="students.length === 0">
+              <td colspan="7" class="text-center">No students found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Recent Courses -->
+  <div class="card mb-4">
+    <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">Recently Added Courses</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Instructor</th>
+              <th>Students</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of recentCourses">
+              <td>{{ course.title }}</td>
+              <td>{{ course['instructorName'] }}</td>
+              <td>{{ course['enrolledStudents']?.length || 0 }}</td>
+              <td>
+                <a [routerLink]="['/courses', course.id]" class="btn btn-sm btn-outline-danger me-2">View</a>
+                <a [routerLink]="['/courses/edit', course.id]" class="btn btn-sm btn-outline-dark">Edit</a>
+              </td>
+            </tr>
+            <tr *ngIf="recentCourses.length === 0">
+              <td colspan="4" class="text-center">No courses available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-end">
+        <a routerLink="/courses" class="btn btn-danger">View All Courses</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Quick Actions -->
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Quick Actions</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <a routerLink="/courses/new" class="btn btn-outline-danger d-block mb-2">
+            <i class="bi bi-plus-circle"></i> Add New Course
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a routerLink="/teachers/new" class="btn btn-outline-danger d-block mb-2">
+            <i class="bi bi-person-plus"></i> Add New Teacher
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a routerLink="/students/new" class="btn btn-outline-danger d-block mb-2">
+            <i class="bi bi-person-plus"></i> Add New Student
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a routerLink="/resources/new" class="btn btn-outline-danger d-block mb-2">
+            <i class="bi bi-file-earmark-plus"></i> Add New Resource
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
