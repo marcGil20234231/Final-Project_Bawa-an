@@ -11,26 +11,9 @@ import { SearchResult } from '../../services/search.service';
   selector: 'app-resources',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule, SearchBarComponent],
-  template: `
-    
-  `,
-  styles: [`
-    .resource-thumbnail {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .resource-thumbnail::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
-      pointer-events: none;
-    }
-  `]
+  templateUrl: './resources.component.html',
+  styleUrls: ['./resources.component.css'],
+  
 })
 export class ResourcesComponent implements OnInit {
   resources: Resource[] = [];
