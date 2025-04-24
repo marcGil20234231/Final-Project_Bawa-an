@@ -191,19 +191,12 @@ export class ResourceService {
 - Search Functionality ✓
 - JSON Server Integration ✓
 
-### 9.2 Design Quality (80 points)
+### 9.2 Design Quality 
 - Usability ✓
 - Visual Design ✓
 - User-Centricity ✓
 - Cross-device Functionality ✓
 
-## 10. Collaboration Guidelines
-
-### 10.1 Code Contribution
-- Follow Angular style guide
-- Document all external code usage
-- Maintain clean commit history
-- Regular code reviews
 
 ### 10.2 Progress Tracking
 - Weekly progress reports
