@@ -1,1 +1,71 @@
-<p>course-list works!</p>
+<!-- src/app/components/courses/course-list/course-list.component.html -->
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Courses</h1>
+    <div *ngIf="isAdmin" class="action-buttons">
+      <a routerLink="/courses/new" class="btn btn-danger">
+        <i class="bi bi-plus-circle me-2"></i>Add New Course
+      </a>
+    </div>
+  </div>
+  
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <div class="input-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Search courses..." 
+          [(ngModel)]="searchTerm"
+          (input)="filterCourses()"
+        >
+        <button class="btn btn-danger" type="button">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+        <option value="">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+  </div>
+  
+  <div *ngIf="filteredCourses.length === 0" class="alert alert-danger">
+    No courses found. Please try a different search term or category.
+  </div>
+  
+  <div class="row">
+    <div *ngFor="let course of filteredCourses" class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div *ngIf="course.imageUrl" class="card-img-top-wrapper">
+          <img [src]="course.imageUrl" class="card-img-top" alt="{{ course.title }}">
+        </div>
+        <div *ngIf="!course.imageUrl" class="card-img-top-placeholder bg-danger text-white d-flex align-items-center justify-content-center">
+          <i class="bi bi-journal-text" style="font-size: 3rem;"></i>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <span class="badge bg-danger">{{ course.level }}</span>
+          </div>
+          <p class="card-text">{{ course.description | slice:0:100 }}...</p>
+          <div class="mt-2 mb-3">
+            <span class="badge bg-secondary me-2">{{ course.category }}</span>
+            <span class="badge bg-dark">{{ course.duration }}</span>
+          </div>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+          <span *ngIf="course['price'] === 0" class="text-success fw-bold">Free</span>
+          <span *ngIf="course['price'] > 0" class="fw-bold">₱{{ course['price'] }}</span>
+          <div>
+            <a [routerLink]="['/courses', course.id]" class="btn btn-sm btn-outline-danger me-2">View Details</a>
+            <button *ngIf="isAdmin" [routerLink]="['/courses/edit', course.id]" class="btn btn-sm btn-outline-dark me-2">Edit</button>
+            <button *ngIf="isAdmin" (click)="deleteCourse(course.id)" class="btn btn-sm btn-outline-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
