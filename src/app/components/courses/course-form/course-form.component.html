@@ -1,1 +1,223 @@
-<p>course-form works!</p>
+<!-- src/app/components/courses/course-form/course-form.component.html -->
+<div class="container my-4">
+  <div class="card">
+    <div class="card-header bg-danger text-white">
+      <h2 class="mb-0">{{ isEditMode ? 'Edit Course' : 'Create New Course' }}</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-8">
+            <!-- Basic Information -->
+            <h3 class="mb-3">Basic Information</h3>
+            
+            <div class="mb-3">
+              <label for="title" class="form-label">Course Title *</label>
+              <input 
+                type="text" 
+                id="title" 
+                formControlName="title" 
+                class="form-control" 
+                [ngClass]="{'is-invalid': courseForm.get('title')?.invalid && courseForm.get('title')?.touched}"
+              >
+              <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" class="invalid-feedback">
+                <div *ngIf="courseForm.get('title')?.errors?.['required']">Title is required.</div>
+                <div *ngIf="courseForm.get('title')?.errors?.['minlength']">Title must be at least 5 characters long.</div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="description" class="form-label">Description *</label>
+              <textarea 
+                id="description" 
+                formControlName="description" 
+                class="form-control" 
+                rows="5"
+                [ngClass]="{'is-invalid': courseForm.get('description')?.invalid && courseForm.get('description')?.touched}"
+              ></textarea>
+              <div *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched" class="invalid-feedback">
+                <div *ngIf="courseForm.get('description')?.errors?.['required']">Description is required.</div>
+                <div *ngIf="courseForm.get('description')?.errors?.['minlength']">Description must be at least 20 characters long.</div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="category" class="form-label">Category *</label>
+                <select 
+                  id="category" 
+                  formControlName="category" 
+                  class="form-select"
+                  [ngClass]="{'is-invalid': courseForm.get('category')?.invalid && courseForm.get('category')?.touched}"
+                >
+                  <option value="">Select Category</option>
+                  <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+                <div *ngIf="courseForm.get('category')?.invalid && courseForm.get('category')?.touched" class="invalid-feedback">
+                  Category is required.
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="level" class="form-label">Level *</label>
+                <select 
+                  id="level" 
+                  formControlName="level" 
+                  class="form-select"
+                  [ngClass]="{'is-invalid': courseForm.get('level')?.invalid && courseForm.get('level')?.touched}"
+                >
+                  <option value="">Select Level</option>
+                  <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
+                </select>
+                <div *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched" class="invalid-feedback">
+                  Level is required.
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="duration" class="form-label">Duration *</label>
+                <input 
+                  type="text" 
+                  id="duration" 
+                  formControlName="duration" 
+                  class="form-control"
+                  placeholder="e.g., 8 weeks, 40 hours"
+                  [ngClass]="{'is-invalid': courseForm.get('duration')?.invalid && courseForm.get('duration')?.touched}"
+                >
+                <div *ngIf="courseForm.get('duration')?.invalid && courseForm.get('duration')?.touched" class="invalid-feedback">
+                  Duration is required.
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <label for="price" class="form-label">Price (₱) *</label>
+                <input 
+                  type="number" 
+                  id="price" 
+                  formControlName="price" 
+                  class="form-control"
+                  min="0"
+                  [ngClass]="{'is-invalid': courseForm.get('price')?.invalid && courseForm.get('price')?.touched}"
+                >
+                <div *ngIf="courseForm.get('price')?.invalid && courseForm.get('price')?.touched" class="invalid-feedback">
+                  <div *ngIf="courseForm.get('price')?.errors?.['required']">Price is required.</div>
+                  <div *ngIf="courseForm.get('price')?.errors?.['min']">Price cannot be negative.</div>
+                </div>
+                <small class="form-text text-muted">Enter 0 for free courses.</small>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="teacherId" class="form-label">Teacher *</label>
+              <select 
+                id="teacherId" 
+                formControlName="teacherId" 
+                class="form-select"
+                [ngClass]="{'is-invalid': courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched}"
+              >
+                <option value="">Select Teacher</option>
+                <option *ngFor="let teacher of teachers" [value]="teacher.id">{{ teacher.name }}</option>
+              </select>
+              <div *ngIf="courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched" class="invalid-feedback">
+                Teacher is required.
+              </div>
+            </div>
+            
+            <!-- Media Section -->
+            <h3 class="mb-3 mt-4">Media</h3>
+            
+            <div class="mb-3">
+              <label for="imageUrl" class="form-label">Course Image URL</label>
+              <input 
+                type="text" 
+                id="imageUrl" 
+                formControlName="imageUrl" 
+                class="form-control"
+                placeholder="https://example.com/course-image.jpg"
+              >
+              <small class="form-text text-muted">Enter a URL for the course cover image.</small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="videoUrl" class="form-label">Course Preview Video URL</label>
+              <input 
+                type="text" 
+                id="videoUrl" 
+                formControlName="videoUrl" 
+                class="form-control"
+                placeholder="https://youtube.com/embed/videoId"
+              >
+              <small class="form-text text-muted">Enter a YouTube embed URL for the course preview video.</small>
+            </div>
+            
+            <!-- Course Details -->
+            <h3 class="mb-3 mt-4">Course Details</h3>
+            
+            <div class="mb-3">
+              <label for="objectives" class="form-label">Learning Objectives *</label>
+              <textarea 
+                id="objectives" 
+                formControlName="objectives" 
+                class="form-control" 
+                rows="4"
+                placeholder="Enter each objective on a new line"
+                [ngClass]="{'is-invalid': courseForm.get('objectives')?.invalid && courseForm.get('objectives')?.touched}"
+              ></textarea>
+              <div *ngIf="courseForm.get('objectives')?.invalid && courseForm.get('objectives')?.touched" class="invalid-feedback">
+                Learning objectives are required.
+              </div>
+              <small class="form-text text-muted">List what students will learn from this course. Enter each objective on a new line.</small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="requirements" class="form-label">Course Requirements</label>
+              <textarea 
+                id="requirements" 
+                formControlName="requirements" 
+                class="form-control" 
+                rows="3"
+                placeholder="Enter each requirement on a new line"
+              ></textarea>
+              <small class="form-text text-muted">List any prerequisites or requirements for taking this course. Enter each item on a new line.</small>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Publishing Settings</h5>
+              </div>
+              <div class="card-body">
+                <p>Your course will be saved as a draft until you publish it.</p>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-danger" [disabled]="isSubmitting">
+                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    {{ isEditMode ? 'Update Course' : 'Create Course' }}
+                  </button>
+                  <a routerLink="/courses" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card mt-3">
+              <div class="card-header bg-light">
+                <h5 class="mb-0">Tips</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i> Use a descriptive title</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i> Clearly define learning objectives</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i> Add high-quality images</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i> Set appropriate course level</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i> Be realistic about duration</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
