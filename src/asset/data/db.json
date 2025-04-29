@@ -264,7 +264,7 @@
   ],
   "enrollments": [
     {
-      "id": 1,
+      "id": "1",
       "studentId": 1,
       "courseId": 1,
       "enrollmentDate": "2024-03-20T10:00:00Z",
@@ -280,6 +280,15 @@
       "status": "active",
       "progress": 0,
       "lastAccessed": "2025-04-16T08:29:48.960Z"
+    },
+    {
+      "id": "f67b",
+      "studentId": "2",
+      "courseId": "1",
+      "enrollmentDate": "2025-04-29T13:03:37.833Z",
+      "status": "active",
+      "progress": 0,
+      "lastAccessed": "2025-04-29T13:03:37.833Z"
     }
   ],
   "users": [
@@ -304,7 +313,7 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
-      "id": 93,
+      "id": "93",
       "fullName": "MARC GIL AGUID BAWA-AN",
       "email": "20234231@s.ubaguio.edu",
       "password": "123456",
@@ -314,7 +323,7 @@
   ],
   "students": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Alice Johnson",
       "studentId": "S2024001",
       "yearLevel": "2",

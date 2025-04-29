@@ -8,7 +8,7 @@
       <div class="col-md-6 text-md-end">
         <ng-container *ngIf="(authService.currentUser$ | async) as user; else loginLinks">
           <span class="me-2">Welcome, {{ user.fullName }}</span>
-          <button class="btn btn-outline-light btn-sm me-2" routerLink="/dashboard">Dashboard</button>
+          <button class="btn btn-outline-light btn-sm me-2" [routerLink]="['/dashboard', user.isAdmin ? 'admin-dashboard' : 'user-dashboard']">Dashboard</button>
           <button class="btn btn-outline-light btn-sm" (click)="logout()">Logout</button>
         </ng-container>
         <ng-template #loginLinks>
