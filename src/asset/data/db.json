@@ -1,0 +1,341 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Introduction to Web Development",
+      "description": "Learn the basics of HTML, CSS, and JavaScript",
+      "imageUrl": "https://miro.medium.com/v2/resize:fit:1200/1*V-Jp13LvtVc2IiY2fp4qYw.jpeg",
+      "teacherId": 1,
+      "category": "Web Development",
+      "level": "Beginner",
+      "duration": 20,
+      "topics": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "students": [
+        1,
+        2,
+        3
+      ],
+      "rating": 4.5,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "price": 0
+    },
+    {
+      "id": "2",
+      "title": "Advanced JavaScript",
+      "description": "Deep dive into modern JavaScript features",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png",
+      "teacherId": 2,
+      "category": "Web Development",
+      "level": "Advanced",
+      "duration": 30,
+      "topics": [
+        "ES6+",
+        "Async Programming",
+        "Design Patterns"
+      ],
+      "students": [
+        1,
+        2
+      ],
+      "rating": 4.8,
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-01-15T00:00:00.000Z",
+      "price": 1000
+    },
+    {
+      "id": "3",
+      "title": "Angular Fundamentals",
+      "description": "Master the Angular framework from scratch",
+      "imageUrl": "https://angular.io/assets/images/logos/angular/angular.png",
+      "teacherId": 1,
+      "category": "Web Development",
+      "level": "Intermediate",
+      "duration": 25,
+      "topics": [
+        "Components",
+        "Services",
+        "Routing",
+        "Forms"
+      ],
+      "students": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "rating": 4.7,
+      "createdAt": "2024-02-01T00:00:00.000Z",
+      "updatedAt": "2024-02-01T00:00:00.000Z",
+      "price": 800
+    },
+    {
+      "id": "4",
+      "title": "Responsive Web Design",
+      "description": "Create beautiful and responsive websites",
+      "imageUrl": "https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png",
+      "teacherId": 2,
+      "category": "Web Design",
+      "level": "Beginner",
+      "duration": 15,
+      "topics": [
+        "CSS Grid",
+        "Flexbox",
+        "Media Queries",
+        "Mobile First"
+      ],
+      "students": [
+        1,
+        2,
+        3
+      ],
+      "rating": 4.6,
+      "createdAt": "2024-02-15T00:00:00.000Z",
+      "updatedAt": "2024-02-15T00:00:00.000Z",
+      "price": 500
+    },
+    {
+      "id": "5",
+      "title": "TypeScript Masterclass",
+      "description": "Learn TypeScript for modern web development",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png",
+      "teacherId": 1,
+      "category": "Web Development",
+      "level": "Intermediate",
+      "duration": 20,
+      "topics": [
+        "Types",
+        "Interfaces",
+        "Generics",
+        "Decorators"
+      ],
+      "students": [
+        1,
+        2
+      ],
+      "rating": 4.9,
+      "createdAt": "2024-03-01T00:00:00.000Z",
+      "updatedAt": "2024-03-01T00:00:00.000Z",
+      "price": 700
+    }
+  ],
+  "teachers": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "specialization": "Web Development",
+      "bio": "Experienced web developer with 10+ years of experience",
+      "courses": [
+        1
+      ],
+      "imageUrl": "https://xsgames.co/randomusers/assets/avatars/male/1.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "specialization": "JavaScript",
+      "bio": "JavaScript expert and author of multiple books",
+      "courses": [
+        2
+      ],
+      "imageUrl": "https://xsgames.co/randomusers/assets/avatars/female/1.jpg",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-01-15T00:00:00.000Z"
+    }
+  ],
+  "resources": [
+    {
+      "id": "1",
+      "title": "Web Development Fundamentals Guide",
+      "description": "A comprehensive guide covering HTML, CSS, and JavaScript basics for beginners",
+      "type": "PDF",
+      "url": "https://www.w3.org/WAI/tutorials/",
+      "category": "Web Development",
+      "thumbnailUrl": "https://miro.medium.com/v2/resize:fit:1200/1*V-Jp13LvtVc2IiY2fp4qYw.jpeg",
+      "author": "John Doe",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Beginner"
+      ],
+      "downloadCount": 150,
+      "isPublic": true,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Angular Development Tutorial",
+      "description": "Learn Angular framework with hands-on examples and projects",
+      "type": "Video",
+      "url": "https://www.youtube.com/watch?v=3dHNOWTI7H8",
+      "category": "Programming",
+      "thumbnailUrl": "https://angular.io/assets/images/logos/angular/angular.png",
+      "author": "Jane Smith",
+      "tags": [
+        "Angular",
+        "TypeScript",
+        "Frontend"
+      ],
+      "downloadCount": 89,
+      "isPublic": true,
+      "createdAt": "2024-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Computer Science Mathematics",
+      "description": "Essential mathematical concepts for computer science students",
+      "type": "Article",
+      "url": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/",
+      "category": "Mathematics",
+      "thumbnailUrl": "https://cdn.pixabay.com/photo/2015/11/15/07/47/geometry-1044090_1280.jpg",
+      "author": "Prof. Maria Garcia",
+      "tags": [
+        "Mathematics",
+        "Computer Science",
+        "Theory"
+      ],
+      "downloadCount": 234,
+      "isPublic": true,
+      "createdAt": "2024-02-01T00:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "MDN Web Development Guide",
+      "description": "Complete web development documentation and tutorials",
+      "type": "Link",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn",
+      "category": "Teaching Materials",
+      "thumbnailUrl": "https://blog.mozilla.org/wp-content/blogs.dir/278/files/2019/10/MDN_Web_Docs.png",
+      "author": "MDN Web Docs",
+      "tags": [
+        "Teaching",
+        "Web Development",
+        "Resources"
+      ],
+      "downloadCount": 78,
+      "isPublic": true,
+      "createdAt": "2024-02-15T00:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Introduction to Python Programming",
+      "description": "Learn Python programming from scratch with practical examples",
+      "type": "Video",
+      "url": "https://www.python.org/about/gettingstarted/",
+      "category": "Programming",
+      "thumbnailUrl": "https://www.python.org/static/community_logos/python-logo-master-v3-TM.png",
+      "author": "Python Software Foundation",
+      "tags": [
+        "Python",
+        "Programming",
+        "Beginner"
+      ],
+      "downloadCount": 312,
+      "isPublic": true,
+      "createdAt": "2024-03-01T00:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "title": "Data Structures and Algorithms",
+      "description": "Comprehensive guide to fundamental data structures and algorithms",
+      "type": "PDF",
+      "url": "https://www.geeksforgeeks.org/data-structures/",
+      "category": "Programming",
+      "thumbnailUrl": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221017172544/Introduction-to-Data-Structures-and-Algorithms-DSA.png",
+      "author": "GeeksforGeeks",
+      "tags": [
+        "DSA",
+        "Programming",
+        "Algorithms"
+      ],
+      "downloadCount": 245,
+      "isPublic": true,
+      "createdAt": "2024-03-15T00:00:00.000Z"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "courseId": 1,
+      "enrollmentDate": "2024-03-20T10:00:00Z",
+      "status": "active",
+      "progress": 0,
+      "lastAccessed": "2024-03-20T10:00:00Z"
+    },
+    {
+      "id": "4ce4",
+      "studentId": "93",
+      "courseId": "1",
+      "enrollmentDate": "2025-04-16T08:29:48.959Z",
+      "status": "active",
+      "progress": 0,
+      "lastAccessed": "2025-04-16T08:29:48.960Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin1",
+      "email": "admin1@edu.ph",
+      "password": "admin123",
+      "fullName": "Admin One",
+      "isAdmin": true,
+      "role": "admin",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "username": "student1",
+      "email": "student1@edu.ph",
+      "password": "student123",
+      "fullName": "Student One",
+      "isAdmin": false,
+      "role": "student",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 93,
+      "fullName": "MARC GIL AGUID BAWA-AN",
+      "email": "20234231@s.ubaguio.edu",
+      "password": "123456",
+      "role": "student",
+      "createdAt": "2025-04-15T23:45:38.275Z"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "studentId": "S2024001",
+      "yearLevel": "2",
+      "program": "BS Computer Science",
+      "major": "Software Engineering",
+      "email": "alice.johnson@example.com",
+      "profileImage": "https://randomuser.me/api/portraits/women/44.jpg",
+      "bio": "Passionate about technology and coding. Loves hackathons and open source.",
+      "academicInterests": [
+        "AI",
+        "Web Development",
+        "Data Science"
+      ],
+      "achievements": [
+        {
+          "title": "Dean's Lister",
+          "description": "Top 5% of class",
+          "type": "Academic",
+          "date": "2023-06-01"
+        }
+      ]
+    }
+  ]
+}
