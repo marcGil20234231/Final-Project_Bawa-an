@@ -22,31 +22,41 @@
 
 ### 2.1 Component Architecture
 ```
-app/
-├── core/
-│   ├── services/
-│   │   ├── resource.service.ts
-│   │   ├── auth.service.ts
-│   │   └── search.service.ts
-│   └── guards/
-│       └── auth.guard.ts
-├── shared/
+src/
+├── index.html
+├── main.server.ts
+├── main.ts
+├── server.ts
+├── styles.css
+├── app/
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   ├── app.config.server.ts
+│   ├── app.config.ts
+│   ├── app.routes.server.ts
+│   ├── app.routes.ts
 │   ├── components/
-│   │   ├── header/
-│   │   ├── footer/
-│   │   ├── search-bar/
-│   │   └── resource-card/
-│   └── models/
-│       └── resource.model.ts
-├── features/
-│   ├── home/
-│   ├── resources/
-│   │   ├── resource-list/
-│   │   ├── resource-detail/
-│   │   └── resource-form/
-│   ├── dashboard/
-│   ├── about/
-│   └── auth/
+│   │   ├── components.component.css
+│   │   ├── components.component.html
+│   │   ├── components.component.spec.ts
+│   │   ├── components.component.ts
+│   │   ├── about-authors/
+│   │   ├── about-topic/
+│   │   ├── auth/
+│   │   ├── courses/
+│   │   ├── dashboard/
+│   │   ├── home/
+│   │   ├── resources/
+│   │   ├── shared/
+│   │   └── teachers/
+│   ├── guards/
+│   ├── models/
+│   ├── pipes/
+│   └── services/
+└── asset/
+    └── data/
 └── app-routing.module.ts
 ```
 
