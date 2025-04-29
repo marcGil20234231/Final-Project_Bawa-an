@@ -1,1 +1,76 @@
-<p>course-detail works!</p>
+<!-- src/app/components/courses/course-detail/course-detail.component.html -->
+<div class="container mt-4">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Loading course details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+    <button class="btn btn-link" (click)="loadCourse(course?.id || 0)">Try Again</button>
+  </div>
+
+  <!-- Course Details -->
+  <div *ngIf="!isLoading && !error && course" class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2>{{ course.title }}</h2>
+      <div class="actions">
+        <button *ngIf="isAdmin" class="btn btn-outline-primary me-2" [routerLink]="['/courses', course.id, 'edit']">
+          Edit Course
+        </button>
+        <button *ngIf="!isEnrolled" class="btn btn-primary" (click)="enrollInCourse()">
+          Enroll Now
+        </button>
+        <span *ngIf="isEnrolled" class="badge bg-success">Enrolled</span>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-8">
+          <h4>Description</h4>
+          <p>{{ course.description }}</p>
+
+          <h4 class="mt-4">Course Details</h4>
+          <ul class="list-unstyled">
+            <li><strong>Duration:</strong> {{ course.duration }}</li>
+            <li><strong>Level:</strong> {{ course.level }}</li>
+            <li><strong>Category:</strong> {{ course.category }}</li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Course Information</h5>
+              <p class="card-text">
+                <strong>Created:</strong><br>
+                {{ course.createdAt | date }}
+              </p>
+              <p class="card-text">
+                <strong>Teacher ID:</strong><br>
+                {{ course.teacherId }}
+              </p>
+              <p class="card-text">
+                <strong>Enrolled Students:</strong><br>
+                {{ (course.students || []).length }}
+              </p>
+              <p class="card-text">
+                <strong>Rating:</strong><br>
+                {{ course.rating }} / 5
+              </p>
+              <p class="card-text" *ngIf="course['price'] > 0">
+                <strong>Price:</strong><br>
+                ₱{{ course['price'] }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
