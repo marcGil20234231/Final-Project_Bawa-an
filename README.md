@@ -36,17 +36,42 @@ This platform aims to provide educational content about sustainable development,
 
 ```
 src/
+src/
+├── index.html
+├── main.server.ts
+├── main.ts
+├── server.ts
+├── styles.css
 ├── app/
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   ├── app.config.server.ts
+│   ├── app.config.ts
+│   ├── app.routes.server.ts
+│   ├── app.routes.ts
 │   ├── components/
+│   │   ├── components.component.css
+│   │   ├── components.component.html
+│   │   ├── components.component.spec.ts
+│   │   ├── components.component.ts
+│   │   ├── about-authors/
+│   │   ├── about-topic/
 │   │   ├── auth/
-│   │   ├── content/
+│   │   ├── courses/
 │   │   ├── dashboard/
-│   │   ├── profile/
-│   │   └── admin/
-│   ├── services/
-│   ├── models/
+│   │   ├── home/
+│   │   ├── resources/
+│   │   ├── shared/
+│   │   └── teachers/
 │   ├── guards/
-│   └── pipes/
+│   ├── models/
+│   ├── pipes/
+│   └── services/
+└── asset/
+    └── data/
+└── app-routing.module.ts
 ```
 
 ## Accessibility Features
@@ -67,8 +92,4 @@ src/
 
 ## Contributors
 
-[Add team members and their contributions]
-
-## License
-
-MIT License
+Marc Gil Bawa-an
