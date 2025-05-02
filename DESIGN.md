@@ -30,20 +30,42 @@
 ## Component Architecture
 
 ```
-App
-├── Auth Module
-│   ├── Login Component
-│   └── Register Component
-├── Content Module
-│   ├── Content List
-│   ├── Content Detail
-│   └── Content Form
-├── Dashboard Module
-│   └── Dashboard Component
-├── Profile Module
-│   └── Profile Component
-└── Admin Module
-    └── Admin Component
+src/
+├── index.html
+├── main.server.ts
+├── main.ts
+├── server.ts
+├── styles.css
+├── app/
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   ├── app.config.server.ts
+│   ├── app.config.ts
+│   ├── app.routes.server.ts
+│   ├── app.routes.ts
+│   ├── components/
+│   │   ├── components.component.css
+│   │   ├── components.component.html
+│   │   ├── components.component.spec.ts
+│   │   ├── components.component.ts
+│   │   ├── about-authors/
+│   │   ├── about-topic/
+│   │   ├── auth/
+│   │   ├── courses/
+│   │   ├── dashboard/
+│   │   ├── home/
+│   │   ├── resources/
+│   │   ├── shared/
+│   │   └── teachers/
+│   ├── guards/
+│   ├── models/
+│   ├── pipes/
+│   └── services/
+└── asset/
+    └── data/
+└── app-routing.module.ts
 ```
 
 ## Color Scheme
