@@ -1,1 +1,223 @@
-<p>student-form works!</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+          <h3 class="mb-0">{{ isEditMode ? 'Edit Student' : 'Add New Student' }}</h3>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center my-5">
+            <div class="spinner-border text-danger" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <form *ngIf="!loading" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                formControlName="name"
+                [class.is-invalid]="submitted && f['name'].errors"
+              >
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Name is required</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="studentId" class="form-label">Student ID <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="studentId" 
+                formControlName="studentId"
+                [class.is-invalid]="submitted && f['studentId'].errors"
+              >
+              <div *ngIf="submitted && f['studentId'].errors" class="invalid-feedback">
+                <div *ngIf="f['studentId'].errors['required']">Student ID is required</div>
+                <div *ngIf="f['studentId'].errors['pattern']">Student ID must be alphanumeric</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="yearLevel" class="form-label">Year Level <span class="text-danger">*</span></label>
+                <select 
+                  class="form-select" 
+                  id="yearLevel" 
+                  formControlName="yearLevel"
+                  [class.is-invalid]="submitted && f['yearLevel'].errors"
+                >
+                  <option value="">Select Year</option>
+                  <option value="1">First Year</option>
+                  <option value="2">Second Year</option>
+                  <option value="3">Third Year</option>
+                  <option value="4">Fourth Year</option>
+                </select>
+                <div *ngIf="submitted && f['yearLevel'].errors" class="invalid-feedback">
+                  <div *ngIf="f['yearLevel'].errors['required']">Year level is required</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="program" class="form-label">Program <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="program" 
+                  formControlName="program"
+                  [class.is-invalid]="submitted && f['program'].errors"
+                >
+                <div *ngIf="submitted && f['program'].errors" class="invalid-feedback">
+                  <div *ngIf="f['program'].errors['required']">Program is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="major" class="form-label">Major <span class="text-danger">*</span></label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="major" 
+                formControlName="major"
+                [class.is-invalid]="submitted && f['major'].errors"
+              >
+              <div *ngIf="submitted && f['major'].errors" class="invalid-feedback">
+                <div *ngIf="f['major'].errors['required']">Major is required</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                formControlName="email"
+                [class.is-invalid]="submitted && f['email'].errors"
+              >
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">Email is required</div>
+                <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="profileImage" class="form-label">Profile Image URL</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="profileImage" 
+                formControlName="profileImage"
+              >
+              <small class="form-text text-muted">Enter a URL for the student's profile image</small>
+            </div>
+
+            <div class="mb-3">
+              <label for="bio" class="form-label">Biography</label>
+              <textarea 
+                class="form-control" 
+                id="bio" 
+                rows="4" 
+                formControlName="bio"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Academic Interests</label>
+              <div formArrayName="academicInterests">
+                <div *ngFor="let interest of academicInterests.controls; let i = index" class="input-group mb-2">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    [formControlName]="i"
+                  >
+                  <button 
+                    class="btn btn-outline-danger" 
+                    type="button"
+                    (click)="removeInterest(i)"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline-secondary" (click)="addInterest()">
+                <i class="bi bi-plus-circle"></i> Add Interest
+              </button>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Achievements</label>
+              <div formArrayName="achievements">
+                <div *ngFor="let achievement of achievements.controls; let i = index">
+                  <div [formGroupName]="i" class="card mb-3">
+                    <div class="card-body">
+                      <div class="mb-2">
+                        <label class="form-label">Title <span class="text-danger">*</span></label>
+                        <input 
+                          type="text" 
+                          class="form-control" 
+                          formControlName="title"
+                        >
+                      </div>
+                      <div class="mb-2">
+                        <label class="form-label">Description</label>
+                        <textarea 
+                          class="form-control" 
+                          rows="2" 
+                          formControlName="description"
+                        ></textarea>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col-md-6">
+                          <label class="form-label">Type</label>
+                          <select class="form-select" formControlName="type">
+                            <option value="Academic">Academic</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Leadership">Leadership</option>
+                            <option value="Community">Community Service</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Date</label>
+                          <input 
+                            type="date" 
+                            class="form-control" 
+                            formControlName="date"
+                          >
+                        </div>
+                      </div>
+                      <button 
+                        type="button" 
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="removeAchievement(i)"
+                      >
+                        <i class="bi bi-trash"></i> Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline-secondary" (click)="addAchievement()">
+                <i class="bi bi-plus-circle"></i> Add Achievement
+              </button>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <a [routerLink]="isEditMode ? ['/students', studentId] : ['/students']" class="btn btn-secondary">
+                Cancel
+              </a>
+              <button type="submit" class="btn btn-danger">
+                {{ isEditMode ? 'Update Student' : 'Create Student' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

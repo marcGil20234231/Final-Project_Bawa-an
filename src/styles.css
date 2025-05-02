@@ -1,1 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Global styles */
+:root {
+  --focus-outline-color: #2563eb;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --focus-outline-color: #000000;
+  }
+}
+
+/* Skip link styling */
+.skip-link {
+  background: #ffffff;
+  color: #2563eb;
+  font-weight: 700;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  transform: translateY(0%);
+}
+
+/* Enhanced focus styles */
+:focus {
+  outline: 3px solid var(--focus-outline-color);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus-outline-color);
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient color contrast */
+.text-muted {
+  color: #595959 !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improved text readability */
+body {
+  line-height: 1.5;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper spacing for better readability */
+p, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+}
+
+/* Improve link underlines for better visibility */
+a:not(.btn):not(.nav-link) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Ensure form controls are accessible */
+input, select, textarea {
+  font-size: 16px; /* Prevents zoom on iOS */
+  max-width: 100%;
+}
+
+/* Improve button accessibility */
+.btn {
+  min-height: 44px; /* Ensure touch target size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

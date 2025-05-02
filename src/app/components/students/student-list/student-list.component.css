@@ -1,0 +1,9 @@
+.pagination .page-link {
+  cursor: pointer;
+  color: #dc3545;
+}
+.pagination .active .page-link {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
