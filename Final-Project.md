@@ -67,13 +67,54 @@ src/
 
 ### 2.3 Routing Structure
 ```typescript
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'resources', component: ResourceListComponent },
-  { path: 'resources/:id', component: ResourceDetailComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent },
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
+import { Routes } from '@angular/router';
+import { adminGuard } from './guards/admin.guard';
+
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent)
+  },
+  {
+    path: 'about-topic',
+    loadComponent: () => import('./components/about-topic/about-topic.component').then(m => m.AboutTopicComponent)
+  },
+  {
+    path: 'about-authors',
+    loadComponent: () => import('./components/about-authors/about-authors.component').then(m => m.AboutAuthorsComponent)
+  },
+  {
+    path: 'courses',
+    loadChildren: () => import('./components/courses/courses.routes').then(m => m.COURSES_ROUTES)
+  },
+  {
+    path: 'teachers',
+    loadChildren: () => import('./components/teachers/teachers.routes').then(m => m.TEACHERS_ROUTES)
+  },
+  {
+    path: 'students',
+    loadChildren: () => import('./components/students/students.routes').then(m => m.STUDENTS_ROUTES)
+  },
+  {
+    path: 'resources',
+    loadChildren: () => import('./components/resources/resources.routes').then(m => m.RESOURCES_ROUTES)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./components/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./components/auth/auth.routes').then(m => m.AUTH_ROUTES)
+  },
+  {
+    path: 'search',
+    loadComponent: () => import('./components/search/search-results.component').then(m => m.SearchResultsComponent)
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 ```
 
@@ -114,17 +155,44 @@ this.resourceForm = this.fb.group({
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceService {
-  private apiUrl = 'http://localhost:3000/resources';
-  
-  constructor(private http: HttpClient) {}
-  
-  getResources(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(this.apiUrl);
+export class CourseService {
+  private apiUrl = 'http://localhost:3000/courses';
+
+  constructor(private http: HttpClient) {
+    // Verify API URL on service initialization
+    console.log('CourseService initialized with API URL:', this.apiUrl);
   }
-  
-  // Additional CRUD operations
-}
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error);
+    if (error.status === 404) {
+      return throwError(() => new Error('Course not found'));
+    }
+    return throwError(() => new Error('Something went wrong; please try again later.'));
+  }
+
+  getCourses(): Observable<Course[]> {
+    console.log('Fetching all courses from:', this.apiUrl);
+    return this.http.get<Course[]>(this.apiUrl).pipe(
+      tap(courses => console.log('Fetched courses:', courses)),
+      catchError(this.handleError)
+    );
+  }
+
+  getCourse(id: number): Observable<Course> {
+    const url = `${this.apiUrl}/${id}`;
+    console.log('Fetching course from:', url);
+    
+    return this.http.get<Course>(url).pipe(
+      tap(course => {
+        console.log('Raw course data received:', course);
+        if (!course) {
+          throw new Error('Course not found');
+        }
+      }),
+      catchError(this.handleError)
+    );
+  }
 ```
 
 ## 4. Design Implementation
