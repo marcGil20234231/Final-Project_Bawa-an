@@ -289,6 +289,15 @@
       "status": "active",
       "progress": 0,
       "lastAccessed": "2025-04-29T13:03:37.833Z"
+    },
+    {
+      "id": "26ff",
+      "studentId": "1",
+      "courseId": "1",
+      "enrollmentDate": "2025-05-06T06:22:43.042Z",
+      "status": "active",
+      "progress": 0,
+      "lastAccessed": "2025-05-06T06:22:43.042Z"
     }
   ],
   "users": [
