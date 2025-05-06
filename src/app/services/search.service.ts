@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, of, throwError, Subject, BehaviorSubject, forkJoin } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Course } from '../models/course.model';
 import { Teacher } from '../models/teacher.model';
@@ -18,7 +18,7 @@ export interface SearchResult {
   providedIn: 'root'
 })
 export class SearchService {
-  private apiUrl = 'http://localhost:3001';
+  private apiUrl = 'http://localhost:3000';
   private searchTerm$ = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {}
@@ -46,14 +46,69 @@ export class SearchService {
       });
     }
 
-    return this.http.get<Resource[]>(`${this.apiUrl}/resources?q=${encodeURIComponent(query)}`).pipe(
-      map(resources => ({
-        searchTerm: query,
-        courses: [],
-        teachers: [],
-        resources: resources
+    console.log('Searching for:', query);
+    const searchTerm = query.toLowerCase().trim();
+
+    // Search for courses
+    const coursesSearch = this.http.get<Course[]>(`${this.apiUrl}/courses`).pipe(
+      map(courses => courses.filter(course => 
+        course.title.toLowerCase().includes(searchTerm) ||
+        course.description.toLowerCase().includes(searchTerm) ||
+        course.category.toLowerCase().includes(searchTerm)
+      )),
+      tap(courses => console.log('Courses found:', courses)),
+      catchError(error => {
+        console.error('Error searching courses:', error);
+        return of([]);
+      })
+    );
+
+    // Search for teachers
+    const teachersSearch = this.http.get<Teacher[]>(`${this.apiUrl}/teachers`).pipe(
+      map(teachers => teachers.filter(teacher => {
+        const name = teacher.name?.toLowerCase() || '';
+        const bio = teacher.bio?.toLowerCase() || '';
+        const specialization = teacher.specialization?.toLowerCase() || '';
+        
+        return name.includes(searchTerm) ||
+               bio.includes(searchTerm) ||
+               specialization.includes(searchTerm);
       })),
-      tap(results => console.log('Search results:', results)),
+      tap(teachers => console.log('Teachers found:', teachers)),
+      catchError(error => {
+        console.error('Error searching teachers:', error);
+        return of([]);
+      })
+    );
+
+    // Search for resources
+    const resourcesSearch = this.http.get<Resource[]>(`${this.apiUrl}/resources`).pipe(
+      map(resources => resources.filter(resource => {
+        const searchTermLower = searchTerm.toLowerCase();
+        return resource.title.toLowerCase().includes(searchTermLower) ||
+          resource.description.toLowerCase().includes(searchTermLower) ||
+          (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(searchTermLower)));
+      })),
+      tap(resources => console.log('Resources found:', resources)),
+      catchError(error => {
+        console.error('Error searching resources:', error);
+        return of([]);
+      })
+    );
+
+    // Combine all search results
+    return forkJoin({
+      courses: coursesSearch,
+      teachers: teachersSearch,
+      resources: resourcesSearch
+    }).pipe(
+      map(results => ({
+        searchTerm: query,
+        courses: results.courses,
+        teachers: results.teachers,
+        resources: results.resources
+      })),
+      tap(results => console.log('Combined search results:', results)),
       catchError(this.handleError)
     );
   }
@@ -63,7 +118,7 @@ export class SearchService {
       return of([]);
     }
 
-    return this.http.get<any[]>(`${this.apiUrl}/resources?q=${encodeURIComponent(query)}`).pipe(
+    return this.http.get<Resource[]>(`${this.apiUrl}/resources?q=${encodeURIComponent(query)}`).pipe(
       map(resources => {
         try {
           const suggestions = new Set<string>();

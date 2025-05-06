@@ -95,6 +95,12 @@ export class SearchBarComponent implements OnInit {
       next: (results) => {
         this.search.emit(results);
         this.isSearching = false;
+        this.router.navigate(['/search'], { 
+          queryParams: { 
+            term: query,
+            ...this.searchOptions
+          } 
+        });
       },
       error: (error) => {
         console.error('Search error:', error);
