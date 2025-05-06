@@ -28,11 +28,10 @@ This platform aims to provide educational content about sustainable development,
 
 1. Clone the repository
 2. Install dependencies: `npm install`
-3. Start JSON Server: `npm run server`
-4. Start development server: `npm start`
-5. Open `http://localhost:4200`
-6. Install json server  `npm install -g json-server`
-7. run json server  `json-server --watch src/asset/data/db.json`
+3. Start development server: `npm start`
+4. Open `http://localhost:4200`
+5. Install json server  `npm install -g json-server`(On powershell)
+6. run json server  `json-server --watch src/asset/data/db.json`
 
 ## Project Structure
 
