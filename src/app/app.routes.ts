@@ -39,6 +39,10 @@ export const routes: Routes = [
     loadChildren: () => import('./components/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
   {
+    path: 'search',
+    loadComponent: () => import('./components/search/search-results.component').then(m => m.SearchResultsComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
