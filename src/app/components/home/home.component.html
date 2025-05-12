@@ -63,7 +63,7 @@
     <div class="row">
       <div class="col-md-3 mb-4" *ngFor="let teacher of featuredTeachers">
         <div class="card h-100 shadow-sm text-center">
-          <img [src]="teacher.imageUrl || '/assets/images/default-profile.jpg'" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;" [alt]="teacher.fullName">
+          <img [src]="teacher.imageUrl || '/assets/images/default-profile.jpg'" class="card-img-top rounded-circle mx-auto mt-3" style="width: 150px; height: 150px; object-fit: cover;" [alt]="teacher.name">
           <div class="card-body">
             <h5 class="card-title">{{ teacher.name }}</h5>
             <p class="text-muted">{{ teacher.specialization }}</p>
